@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+
+<div th:replace="admin/header::header"></div>
+<body>
+<div th:replace="admin/header::navbar"></div>
+<div class="container">
+  <div class="row">
+    <h1>List of Comments</h1>
+    <br/>
+    <table class="table table-stripped table-hover table-bordered">
+      <thead class="table-dark">
+      <tr>
+        <th>#</th>
+        <th>Email</th>
+        <th>Comment</th>
+        <th>Creation date</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="comment,i : ${comments}">
+        <td th:text="${i.count}"></td>
+        <td th:text="${comment.email}"></td>
+        <td th:text="${comment.content}"></td>
+        <td th:text="${#temporals.format(comment.created,'dd MMM yyyy')}"></td>
+        <td>
+          <a class="btn btn-danger" th:href="@{/admin/posts/comments/{commentId}(commentId=${comment.id})}">Delete</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br/>
+<div th:replace="admin/footer::footer"></div>
+</body>
+</html>
